@@ -8,15 +8,15 @@ app.use(async (req, res, next) => {
 });
 
 app.get('/movies/:expression', async(req, res) => {
-
     await MoviesController.filterMoviesByExpression(req, res);
-
 });
 
 app.get('/movies/information/:id', async(req, res) => {
-
     await MoviesController.filterMoviesById(req, res);
+});
 
+app.post('/movies/information/:id', async(req, res) => {
+    await MoviesController.addCommentByMovie(req, res);
 });
 
 

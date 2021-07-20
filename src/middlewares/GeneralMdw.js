@@ -8,6 +8,7 @@ class GeneralMiddleware {
             if(authorization) {
                 let token = authorization.split('Bearer ').pop();
                 let user = await JwtInstance.verifyToken(token, 'bd');
+                delete user['password'];
                 Object.assign(req, { user: user });
                 next();
             } else {

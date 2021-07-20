@@ -10,13 +10,15 @@ class UserController {
         let { body } = req;
         try {
             if(body['email'] && body['password']) {
+            
+                let {result, user } = await UserClass.checkUserAccount(body['email'], body['password']);
 
-                if(!await UserClass.checkUserAccount(body['email'], body['password'])) throw new Error('That account not exists')
-
-                let token = JwtInstance.signToken(body, 'bd');
-
+                if(!result) throw new Error('That account not exists')
+                
+                let token = JwtInstance.signToken(user.toJSON(), 'bd');
+                
                 res.status(200).send({ data: { email: body['email'], token: token }, message: 'Successfully login' });
-
+            
             } else {
                 throw new Error('Parameters are missing to process the request');
             }

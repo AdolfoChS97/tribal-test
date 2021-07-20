@@ -12,8 +12,8 @@ class User {
     async checkUserAccount(email, password){
         let encryptedPassword = CryptoInstance.encrypt(password, 'bd');
         const [ user ] = await UserModel.find({ email: email, password: encryptedPassword });
-        if(!user) return false;
-        else return true;
+        if(!user) return { result: false, user: undefined };
+        else return { result: true, user: user};
     }
 
 }
