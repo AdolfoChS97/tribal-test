@@ -6,12 +6,13 @@ const bodyParser = require('body-parser');
 const port = 3000;
 const mongoose = require('mongoose');
 const userRoutes = require('./modules/users/routes/index');
+const moviesRoutes = require('./modules/movies/routes/index');
 
 app.use(helmet());
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
 app.use(cors());
-app.use([userRoutes]);
+app.use([userRoutes, moviesRoutes]);
 
 ( async () => {
 
