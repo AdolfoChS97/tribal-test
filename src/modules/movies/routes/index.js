@@ -1,6 +1,11 @@
 const express = require('express');
 const app = express();
 const MoviesController = new (require('./../controllers/MoviesController'));
+const GeneralMiddleware = new (require('./../../../middlewares/GeneralMdw'));
+
+app.use(async (req, res, next) => {
+    await GeneralMiddleware.checkToken(req, res, next);
+});
 
 app.get('/movies/:expression', async(req, res) => {
 
